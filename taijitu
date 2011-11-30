@@ -271,7 +271,7 @@ class MainFrame(wx.Frame):
 def main():
 	# read configuration file
 	nodedict = dict()
-	for line in fileinput.input(self_dir + "conf/steps.conf"):
+	for line in fileinput.input(self_dir + "/conf/steps.conf"):
 		line_tmp = re.sub("\n$","",line)
 		if (line_tmp == ""):
 			continue
