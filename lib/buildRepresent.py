@@ -40,6 +40,7 @@ class BaseDI():
 	def getDown(self):
 		return self.__bDown
 class NodeDrawInfo(BaseDI):
+	__fontface = pyFF.create_fontface()
 	def __init__(self, parent, ctx, node):
 		BaseDI.__init__(self, parent)
 		self.__node = node
@@ -75,10 +76,6 @@ class NodeDrawInfo(BaseDI):
 		self.__r = self.getParent().GetFactor()
 
 		# fontface
-		face = pyFF.create_fontface()
-		ctx.set_font_face(face)
-		ctx.set_font_size(0.5)
-		self.__fontface = ctx.get_font_face()
 	def draw(self, ctx):
 		pat = self.__pat
 		alpha = 0.7
@@ -106,9 +103,12 @@ class NodeDrawInfo(BaseDI):
 		self.Restore(ctx)
 	def drawLabel(self, ctx, alpha):
 		self.Save(ctx)
+		# 设置字体
+		ctx.set_font_face(self.__fontface)
+		ctx.set_font_size(0.5)
+		# 计算
 		label = self.get_label()
 		(x, y, width, height, dx, dy) = ctx.text_extents(label)
-		ctx.set_font_face(self.__fontface)
 		ctx.set_source(cairo.SolidPattern(0, 0, 0, alpha))
 		ctx.move_to(- width/2, height/2)
 		ctx.show_text(label)
