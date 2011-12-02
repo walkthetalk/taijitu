@@ -91,6 +91,9 @@ class TaiJiTu():
 		ctx.stroke()
 
 		ctx.restore()
+	def WriteToPNG(self, filename):
+		self.Draw()
+		self.__surface.write_to_png(filename)
 	def ToWxBitmap(self):
 		self.Draw()
 
@@ -111,3 +114,6 @@ class TaiJiTu():
 		bmp.CopyFromBuffer(data, fmt, stride)
 		return bmp
 
+if __name__ == '__main__':
+	tjt = TaiJiTu(None, 400,400)
+	tjt.WriteToPNG("tjt.png")

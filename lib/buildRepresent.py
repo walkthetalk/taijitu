@@ -172,17 +172,17 @@ class RelationDrawInfo(BaseDI):
 					self.__ey - self.__sy)
 		self.__l = math.sqrt(math.pow(self.__dx,2)+math.pow(self.__dy,2))
 
-		if (self.__l < (self.__sr + self.__er + 2 * 2)):
-			print("dist is too close")
-			return
-
-		# path
+		# var
 		factor = self.getParent().GetFactor()
 		nodeEdgeSpace = factor/20
 		aW = factor/2	# 箭头宽度
 		aH = factor/4	# 箭头高度
 		angle = math.pi/8 # 角度
+		if (self.__l < (self.__sr + self.__er + 2 * nodeEdgeSpace + aW)):
+			print("warning: " + self.get_label() + " dist is too close")
+			return
 
+		# path
 		asx = self.__sr + nodeEdgeSpace
 		aex = self.__l - self.__er - nodeEdgeSpace # 箭头顶点纵坐标
 		axillax = aex - aW*2/3	# 箭腋坐标
