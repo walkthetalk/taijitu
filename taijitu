@@ -258,8 +258,10 @@ class MainFrame(wx.Frame):
 		self.__st.OnSize(w-self.__sidewidth*2, h-self.__sidewidth*2)
 
 	def OnTimerBR(self, evt):
-		self.__timerBR_DI.IncBuildProgress()
-		self.Refresh()
+		# timer will not stop immediately after stop()
+		if self.__timerBR_DI != None:
+			self.__timerBR_DI.IncBuildProgress()
+			self.Refresh()
 	def StartBuildTimer(self, nDI):
 		self.__timerBR_DI = nDI
 		self.__timerBR.Start(100)
